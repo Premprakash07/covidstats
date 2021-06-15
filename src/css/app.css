@@ -6,7 +6,13 @@
     display: flex;
     align-content: center;
     justify-content: space-around;
-    flex-wrap: wrap;
-    /* padding: 20px 0px; */
     height: 100%;
+}
+@media  (max-width: 625px) {
+    .opening{
+        flex-wrap: wrap;
+    }
+    .worldtable .table{
+        height: 350px;
+    }
 }

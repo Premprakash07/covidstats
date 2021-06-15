@@ -25,7 +25,7 @@ ul{
 }
 
 ::-webkit-scrollbar{
-    width: 10px;
+    width: 5px;
 }
 ::-webkit-scrollbar-thumb{
     background-color: rgb(194, 194, 194);
@@ -39,6 +39,5 @@ ul{
 @media  (max-width: 1266px) {
     .app{
         width: 100%;
-        /* padding: 0px 20px; */
     }
 }

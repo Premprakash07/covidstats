@@ -4,4 +4,10 @@
     color: white;
     font-size: .85rem;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alert .close-icon{
+    font-size: 1.3rem;
 }

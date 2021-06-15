@@ -14,12 +14,14 @@ function WorldTable() {
             .then((data) => {
                 const sorteddata = data.sort((a, b) => (b.cases - a.cases))
                 setTableData(sorteddata);
+            }).catch((error) => {
+                console.log(error)
             })
         }
         setcountriesdata();
 
         const fetch_chartdata = async () => {
-        await fetch('https://api.caw.sh/v3/covid-19/historical/all?lastdays=120')
+        await fetch('https://api.caw.sh/v3/covid-19/historical/all?lastdays=30')
         .then(response => response.json())
         .then(data => {
 
@@ -30,7 +32,7 @@ function WorldTable() {
             for(var casedata in data.cases){
                 if(lastcasedata && lastdeathdata && lastrecoverdata){
                     var newdatapoint = {
-                        x: casedata,
+                        date: casedata,
                         cases: data.cases[casedata] - lastcasedata,
                         death: data.deaths[casedata] - lastdeathdata,
                         recovered: data.recovered[casedata] - lastrecoverdata
@@ -42,7 +44,10 @@ function WorldTable() {
                 lastrecoverdata = data.recovered[casedata]
             }
             setchartdata(newchartdata);
-        })}
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
         fetch_chartdata()
 
     }, [])

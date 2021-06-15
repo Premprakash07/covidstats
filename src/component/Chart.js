@@ -25,8 +25,8 @@ function Chart(props) {
               <Area type="monotone" dataKey="recovered" stroke="green" fillOpacity={1} fill="url(#colorrecovered)" />
               <Area type="monotone" dataKey="cases" stroke="red" fillOpacity={1} fill="url(#colorcases)" />
               <Area type="monotone" dataKey="death" stroke="black" fillOpacity={1} fill="url(#colordeaths)" />
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-              <XAxis dataKey="x" />
+              <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
               <Legend />
