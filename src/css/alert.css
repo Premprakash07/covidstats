@@ -1,0 +1,7 @@
+.alert{
+    padding: 3px 0px;
+    background-color: rgb(255, 41, 41);
+    color: white;
+    font-size: .85rem;
+    text-align: center;
+}
