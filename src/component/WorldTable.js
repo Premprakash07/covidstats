@@ -24,16 +24,22 @@ function WorldTable() {
         .then(data => {
 
             var newchartdata = []
-            var lastdata
+            var lastcasedata
+            var lastdeathdata
+            var lastrecoverdata
             for(var casedata in data.cases){
-                if(lastdata){
+                if(lastcasedata && lastdeathdata && lastrecoverdata){
                     var newdatapoint = {
                         x: casedata,
-                        cases: data.cases[casedata] - lastdata
+                        cases: data.cases[casedata] - lastcasedata,
+                        death: data.deaths[casedata] - lastdeathdata,
+                        recovered: data.recovered[casedata] - lastrecoverdata
                     }
                     newchartdata.push(newdatapoint)
                 }
-                lastdata = data.cases[casedata]
+                lastcasedata = data.cases[casedata]
+                lastdeathdata = data.deaths[casedata]
+                lastrecoverdata = data.recovered[casedata]
             }
             setchartdata(newchartdata);
         })}

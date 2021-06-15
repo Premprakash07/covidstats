@@ -42,16 +42,22 @@ function Stats() {
             .then(data => {
     
                 var newchartdata = []
-                var lastdata
+                var lastcasedata
+                var lastdeathdata
+                var lastrecoverdata
                 for(var casedata in data.cases){
-                    if(lastdata){
+                    if(lastcasedata && lastdeathdata && lastrecoverdata){
                         var newdatapoint = {
                             x: casedata,
-                            cases: data.cases[casedata] - lastdata
+                            cases: data.cases[casedata] - lastcasedata,
+                            death: data.deaths[casedata] - lastdeathdata,
+                            recovered: data.recovered[casedata] - lastrecoverdata
                         }
                         newchartdata.push(newdatapoint)
                     }
-                    lastdata = data.cases[casedata]
+                    lastcasedata = data.cases[casedata]
+                    lastdeathdata = data.deaths[casedata]
+                    lastrecoverdata = data.recovered[casedata]
                 }
                 setchartdata(newchartdata);
             })}
@@ -94,29 +100,72 @@ function Stats() {
 
         // for yesterday's data
         countrycode !== 'wrldwide' ? (
-            fetch(`https://api.caw.sh/v3/covid-19/historical/${countrycode}?lastdays=2`)
+            fetch(`https://api.caw.sh/v3/covid-19/historical/${countrycode}?lastdays=120`)
             .then(response => response.json())
             .then(data => {
                 const casestype = data['timeline']
                 const yesterday = {
-                    'Cases': Object.values(casestype['cases'])[1] - Object.values(casestype['cases'])[0],
-                    'Deaths': Object.values(casestype['deaths'])[1] - Object.values(casestype['deaths'])[0],
-                    'Recovered': Object.values(casestype['recovered'])[1] - Object.values(casestype['recovered'])[0]
+                    'Cases': Object.values(casestype.cases)[119] - Object.values(casestype.cases)[118],
+                    'Deaths': Object.values(casestype.deaths)[119] - Object.values(casestype.deaths)[118],
+                    'Recovered': Object.values(casestype.recovered)[119] - Object.values(casestype.recovered)[118]
                 }
+
+                var newchartdata = []
+                var lastcasedata
+                var lastdeathdata
+                var lastrecoverdata
+                for(var casedata in data.timeline.cases){
+                    if(lastcasedata && lastdeathdata && lastrecoverdata){
+                        var newdatapoint = {
+                            x: casedata,
+                            cases: data.timeline.cases[casedata] - lastcasedata,
+                            deaths: data.timeline.deaths[casedata] - lastdeathdata,
+                            recovered: data.timeline.recovered[casedata] - lastrecoverdata
+                        }
+                        newchartdata.push(newdatapoint)
+                    }
+                    lastcasedata = data.timeline.cases[casedata]
+                    lastdeathdata = data.timeline.deaths[casedata]
+                    lastrecoverdata = data.timeline.recovered[casedata]
+                }
+                setchartdata(newchartdata)
+
                 setyesterdaydata(yesterday)
             }).catch((error) => {
                 console.log(error)
             })
         ) : (
-            fetch('https://api.caw.sh/v3/covid-19/historical/all?lastdays=2')
+            fetch('https://api.caw.sh/v3/covid-19/historical/all?lastdays=120')
         .then(response => response.json())
         .then(data => {
             const yesterday = {
-                'Cases': Object.values(data['cases'])[1] - Object.values(data['cases'])[0],
-                'Deaths': Object.values(data['deaths'])[1] - Object.values(data['deaths'])[0],
-                'Recovered': Object.values(data['recovered'])[1] - Object.values(data['recovered'])[0]
+                'Cases': Object.values(data['cases'])[119] - Object.values(data['cases'])[118],
+                'Deaths': Object.values(data['deaths'])[119] - Object.values(data['deaths'])[118],
+                'Recovered': Object.values(data['recovered'])[119] - Object.values(data['recovered'])[118]
             }
-            setyesterdaydata(yesterday)
+
+        var newchartdata = []
+        var lastcasedata
+        var lastdeathdata
+        var lastrecoverdata
+        for(var casedata in data.cases){
+            if(lastcasedata && lastdeathdata && lastrecoverdata){
+                var newdatapoint = {
+                    x: casedata,
+                    cases: data.cases[casedata] - lastcasedata,
+                    death: data.deaths[casedata] - lastdeathdata,
+                    recovered: data.recovered[casedata] - lastrecoverdata
+                }
+                newchartdata.push(newdatapoint)
+            }
+            lastcasedata = data.cases[casedata]
+            lastdeathdata = data.deaths[casedata]
+            lastrecoverdata = data.recovered[casedata]
+        }
+        setchartdata(newchartdata);
+        console.log(newchartdata)
+
+        setyesterdaydata(yesterday)
         }) 
         )
     }
