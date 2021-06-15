@@ -93,7 +93,7 @@ function Stats() {
         })
 
         // for yesterday's data
-        (countrycode !== 'wrldwide' ? (
+        countrycode !== 'wrldwide' ? (
             fetch(`https://api.caw.sh/v3/covid-19/historical/${countrycode}?lastdays=2`)
             .then(response => response.json())
             .then(data => {
@@ -104,6 +104,8 @@ function Stats() {
                     'Recovered': Object.values(casestype['recovered'])[1] - Object.values(casestype['recovered'])[0]
                 }
                 setyesterdaydata(yesterday)
+            }).catch((error) => {
+                console.log(error)
             })
         ) : (
             fetch('https://api.caw.sh/v3/covid-19/historical/all?lastdays=2')
@@ -116,7 +118,7 @@ function Stats() {
             }
             setyesterdaydata(yesterday)
         }) 
-        ))
+        )
     }
 
 

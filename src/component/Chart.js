@@ -7,7 +7,7 @@ function Chart(props) {
     return (
         <div>
             <ResponsiveContainer width='100%' aspect={4.0/2.5}>
-            <AreaChart data={props.data} margin={{ top: 10, right: 5, bottom: 5, left: 5 }}>
+            <AreaChart data={props.data} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
             <defs>
                 <linearGradient id="colorcases" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="rgb(255, 41, 41)" stopOpacity={0.8}/>
