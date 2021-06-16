@@ -42,8 +42,10 @@
 @media  (max-width: 725px) {
     .info{
         width: 155px;
+        padding: 10px;
     }
     .info span{
         font-size: 1rem;
+        margin-top: 8px;
     }
 }
