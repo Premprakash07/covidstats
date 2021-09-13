@@ -24,12 +24,12 @@ function WorldTable() {
       await fetch("https://api.caw.sh/v3/covid-19/historical/all?lastdays=30")
         .then((response) => response.json())
         .then((data) => {
-          var newchartdata = [];
-          var lastcasedata;
-          var lastdeathdata;
-          var lastrecoverdata;
+          let newchartdata = [];
+          let lastcasedata;
+          let lastdeathdata;
+          let lastrecoverdata;
           for (var casedata in data.cases) {
-            if (lastcasedata && lastdeathdata && lastrecoverdata) {
+            if (lastcasedata) {
               let newdatapoint = {
                 date: casedata,
                 cases: data.cases[casedata] - lastcasedata,
@@ -37,13 +37,11 @@ function WorldTable() {
                 recovered: data.recovered[casedata] - lastrecoverdata,
               };
               newchartdata.push(newdatapoint);
-              console.log(newdatapoint);
             }
             lastcasedata = data.cases[casedata];
             lastdeathdata = data.deaths[casedata];
             lastrecoverdata = data.recovered[casedata];
           }
-          console.log(newchartdata);
           setchartdata(newchartdata);
         })
         .catch((error) => {

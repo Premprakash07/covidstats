@@ -51,7 +51,7 @@ function Stats() {
           var lastrecoverdata;
           for (var casedata in data.cases) {
             let newdatapoint;
-            if (lastcasedata && lastdeathdata && lastrecoverdata) {
+            if (lastcasedata) {
               newdatapoint = {
                 date: casedata,
                 cases: data.cases[casedata] - lastcasedata,
@@ -63,7 +63,6 @@ function Stats() {
             lastcasedata = data.cases[casedata];
             lastdeathdata = data.deaths[casedata];
             lastrecoverdata = data.recovered[casedata];
-            console.log(newdatapoint);
           }
           setchartdata(newchartdata);
         })
@@ -137,7 +136,7 @@ function Stats() {
             var lastdeathdata;
             var lastrecoverdata;
             for (var casedata in data.timeline.cases) {
-              if (lastcasedata && lastdeathdata && lastrecoverdata) {
+              if (lastcasedata) {
                 var newdatapoint = {
                   date: casedata,
                   cases: data.timeline.cases[casedata] - lastcasedata,
@@ -176,7 +175,7 @@ function Stats() {
             var lastdeathdata;
             var lastrecoverdata;
             for (var casedata in data.cases) {
-              if (lastcasedata && lastdeathdata && lastrecoverdata) {
+              if (lastcasedata) {
                 var newdatapoint = {
                   date: casedata,
                   cases: data.cases[casedata] - lastcasedata,
