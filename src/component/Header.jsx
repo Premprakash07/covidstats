@@ -32,6 +32,9 @@ function Header() {
                     <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub" target='blank'>
                         <li>FAQs</li>
                     </a>
+                    <a href="localhost:3000" target='blank'>
+                        <li>FAQs</li>
+                    </a>
                 </ul>
                 <div className="nav-icon" onClick={navCollapse}><MenuIcon style={{fontSize: 'inherit'}} /></div>
                 
